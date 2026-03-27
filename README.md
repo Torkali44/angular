@@ -1,7 +1,6 @@
 # Angular Labs
 
 This repository contains multiple Angular labs. Each lab is stored in its own branch as a feature.  
-The `master` branch contains only this README as the central overview.
 
 ## Labs / Features
 
