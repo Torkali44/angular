@@ -1,0 +1,22 @@
+
+<div class="container mt-5">
+  <div class="row">
+
+    <div class="col-md-4 mb-4" *ngFor="let student of students">
+      <div class="card shadow-lg h-100 text-center">
+
+        <img [src]="student.photoUrl" class="p-3 rounded-circle mx-auto mt-2"style="height:200px; width:200px; object-fit:cover;" >
+        <div class="card-body">
+          <h4 class="card-title">{{ student.name }}</h4>
+          <p class="card-text">Age: {{ student.age }}</p>
+
+          <button class="btn btn-primary">
+            View Profile
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
