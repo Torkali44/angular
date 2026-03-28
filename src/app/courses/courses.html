@@ -30,7 +30,11 @@
               <h4>{{ course.title }}</h4>
   
               <p>Instructor: {{ course.instructor }}</p>
-              <p>Price: {{ course.price }} $</p>
+              <p>Original Price: {{ course.price }}</p>
+
+              <p>After Discount (20%): 
+                {{ course.price | discount:20 }}
+              </p>             
               <p>Seats: {{ course.seats }}</p>
   
               <p *ngIf="course.seats <= 2 && course.seats > 0" style="color:red;">
@@ -39,7 +43,10 @@
   
               <button class="btn btn-primary"
                       (click)="decreaseSeat(course)"
-                      [disabled]="course.seats === 0">
+                      [disabled]="course.seats === 0"
+                      appDisableAfterClick
+                      >
+                      
                 Register
               </button>
   
