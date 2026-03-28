@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { DiscountPipe } from '../discount-pipe';
+import { DisableAfterClickDirective } from '../disable-after-click';
 export interface Course {
   id: number;
   title: string;
@@ -14,7 +16,7 @@ export interface Course {
 @Component({
   selector: 'app-courses',
   standalone: true,
-  imports: [CommonModule , FormsModule],
+  imports: [CommonModule , FormsModule , DiscountPipe , DisableAfterClickDirective],
   templateUrl: './courses.html',
   styleUrl: './courses.css',
 })
