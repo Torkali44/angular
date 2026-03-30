@@ -1,0 +1,18 @@
+<div class="container mt-4">
+
+  <select class="form-select mb-3" [(ngModel)]="selectedCategory">
+    <option value="All">All</option>
+    <option value="front">front</option>
+    <option value="back">back</option>
+    <option value="ui">ui</option>
+    <option value="web">web</option>
+  </select>
+
+  <app-courses
+    [selectedCategory]="selectedCategory"
+    (courseSelected)="onCourseSelected($event)">
+  </app-courses>
+
+  <h3>Total Price: {{ totalPrice }}</h3>
+
+</div>

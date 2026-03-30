@@ -1,10 +1,11 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { CoursesComponent } from "./courses/courses";
+import { OrderComponent } from "./order/order";
+import { RouterLink,RouterOutlet, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, CoursesComponent],
+  standalone:true,
+  imports: [RouterOutlet, OrderComponent, RouterLink, RouterLinkActive],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
