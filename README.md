@@ -7,6 +7,7 @@ This repository contains multiple Angular labs. Each lab is stored in its own br
 - **interpolation** → Lab 1: StudentApp using interpolation
 - **filterProducts** → Lab 2: Courses with filtering and Bootstrap cards
 - **add-discount-to-product** → Lab 3: add discount pipe and disableAfterClick directive
+- **add-routing-and-parent-child** → Lab 4: add routing and parent child communication 
 
 ---
 
