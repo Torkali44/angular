@@ -1,0 +1,41 @@
+<div class="container mt-5">
+  <h2>Insert New Course</h2>
+  <form (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="courseTitle" class="form-label">Course Title</label>
+      <input type="text" class="form-control" id="courseTitle" [(ngModel)]="course.title" name="title" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="instructor" class="form-label">Instructor</label>
+      <input type="text" class="form-control" id="instructor" [(ngModel)]="course.instructor" name="instructor"
+        required>
+    </div>
+
+    <div class="mb-3">
+      <label for="price" class="form-label">Price</label>
+      <input type="number" class="form-control" id="price" [(ngModel)]="course.price" name="price" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="seats" class="form-label">Seats</label>
+      <input type="number" class="form-control" id="seats" [(ngModel)]="course.seats" name="seats" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="image" class="form-label">Image URL</label>
+      <input type="text" class="form-control" id="image" [(ngModel)]="course.image" name="image">
+    </div>
+
+    <div class="mb-3">
+      <label for="category" class="form-label">Category</label>
+      <select class="form-select" id="category" [(ngModel)]="course.catId" name="catId" (change)="updateCategoryName()"
+        required>
+        <option value="">Select Category</option>
+        <option *ngFor="let cat of categories" [value]="cat.id">{{cat.name}}</option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add Course</button>
+  </form>
+</div>

@@ -1,18 +1,9 @@
-import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DiscountPipe } from '../discount-pipe';
 import { DisableAfterClickDirective } from '../disable-after-click';
-
-export interface Course {
-  id: number;
-  title: string;
-  instructor: string;
-  price: number;
-  seats: number;
-  image: string;
-  catId: number;
-  category: string;
-}
+import { CourseService, Course } from '../services/course.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-courses',
@@ -21,66 +12,32 @@ export interface Course {
   templateUrl: './courses.html',
   styleUrls: ['./courses.css'],
 })
-export class CoursesComponent implements OnChanges {
+export class CoursesComponent implements OnChanges, OnInit, OnDestroy {
 
   @Input() selectedCategory: string = 'All';
   @Output() totalPriceChange = new EventEmitter<number>();
   @Output() courseSelected = new EventEmitter<number>();
-  courses: Course[] = [
-    {
-      id: 1,
-      title: 'Angular',
-      instructor: 'mona',
-      price: 100,
-      seats: 20,
-      image: 'images/images.png',
-      catId: 1,
-      category: 'front'
-    },
-    {
-      id: 2,
-      title: 'React',
-      instructor: 'sara',
-      price: 120,
-      seats: 10,
-      image: 'images/images.png',
-      catId: 2,
-      category: 'front'
-    },
-    {
-      id: 3,
-      title: 'Vue',
-      instructor: 'abdelrahman',
-      price: 90,
-      seats: 25,
-      image: 'images/images.png',
-      catId: 1,
-      category: 'ui'
-    },
-    {
-      id: 4,
-      title: 'Node.js',
-      instructor: 'mariam',
-      price: 150,
-      seats: 10,
-      image: 'images/images.png',
-      catId: 3,
-      category: 'web'
-    },
-    {
-      id: 5,
-      title: 'PHP',
-      instructor: 'hend',
-      price: 80,
-      seats: 30,
-      image: 'images/images.png',
-      catId: 2,
-      category: 'back'
-    }
-  ];
-
+  courses: Course[] = [];
   filteredCourses: Course[] = [];
   total: number = 0;
+  private subscriptions: Subscription = new Subscription();
+
+  constructor(private courseService: CourseService) {}
+
+  ngOnInit() {
+    const sub = this.courseService.getAllCourses().subscribe({
+      next: (courses) => {
+        this.courses = courses as Course[];
+        this.filterCourses();
+      },
+      error: (err) => console.error('Error loading courses', err)
+    });
+    this.subscriptions.add(sub);
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     this.filterCourses();
